@@ -1,0 +1,17 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+
+        <h2>Delete Grade Class</h2>
+        <hr>
+        <div class="alert alert-danger" role="alert">
+            Note: Deletion cannot be reversed!
+        </div>
+        <h3>Are you sure you want to delete this grade class: {{ object.grade_class_name }}</h3>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Delete</button>
+            <a href="{% url 'main:management:view_grade_classes' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+        <h2>Add a new student to the database</h2>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        <hr>
+        <form method="post" action="{% url 'main:management:create_student' %}"> {% csrf_token %}
+            <h3>Student's information:</h3>
+            {% for field in form %}
+            {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            <div class="form-group">
+                <label for="{{ field.html_name }}">{{ field.label }}:</label><br>
+                {{ field }}
+            </div>
+            {% endfor %}
+            <br>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+
+<main class="page-content">
+    <div class="container-fluid">
+        <h2>Delete Academic Term</h2>
+        <hr>
+        <div class="alert alert-danger" role="alert">
+            Note: Deletion cannot be reversed!
+        </div>
+        <h3>Are you sure you want to delete this academic term: {{ object.academic_term_name }}</h3>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Delete</button>
+            <a href="{% url 'main:management:view_academic_terms' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</main>
+{% endblock %}

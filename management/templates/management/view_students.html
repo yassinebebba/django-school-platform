@@ -1,0 +1,42 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+
+        <h2>Students' database: Number of students ({{ accounts.count }}).</h2>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        <hr>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Identifier</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Grade Level</th>
+                <th scope="col">Edit/Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for account in accounts %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <th><a href="{% url 'main:management:edit_student' account.id %}">{{ account.identifier }}</a></th>
+                <th>{{ account.first_name }}</th>
+                <th>{{ account.last_name }}</th>
+                <th>{{ account.email }}</th>
+                <th>{{ account.student.grade_class }}</th>
+                <th>
+                    <a href="{% url 'main:management:edit_student' account.id %}" class="btn btn-info">Edit</a>
+                    <a href="{% url 'main:management:delete_user' account.id %}" class="btn btn-danger">Delete</a>
+                </th>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

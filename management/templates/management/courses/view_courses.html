@@ -1,0 +1,34 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+
+        <h2>Courses' database: Number of courses ({{ courses.count }}).</h2>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        <hr>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Course name</th>
+                <th scope="col">Edit/Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for course in courses %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <th><a href="{% url 'main:management:edit_course' course.id %}">{{ course.course_name }}</a></th>
+                <th>
+                    <a href="{% url 'main:management:edit_course' course.id %}" class="btn btn-info">Edit</a>
+                    <a href="{% url 'main:management:delete_course' course.id %}" class="btn btn-danger">Delete</a>
+                </th>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

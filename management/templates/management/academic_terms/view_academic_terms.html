@@ -1,0 +1,49 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+<h2>Academic Terms' database: Number of academic terms ({{ academic_terms.count }}).</h2>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+<hr>
+<form method="get">
+    <p>Filter year: <input type="text" value="{{filter}}" name="filter"/></p>
+    <p><input type="submit" name="submit" value="submit"/></p>
+</form>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Academic term name</th>
+        <th scope="col">Academic year</th>
+        <th scope="col">Multiplier</th>
+        <th scope="col">Edit/Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for academic_term in academic_terms %}
+    <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <th>
+            <a href="{% url 'main:management:edit_academic_term' academic_term.id %}">
+                {{ academic_term.academic_term_name }}
+            </a>
+        </th>
+        <th>{{ academic_term.academic_year|date:"d/m/Y" }}</th>
+        <th>{{ academic_term.academic_term_multiplier }}</th>
+        <th>
+            <a href="{% url 'main:management:edit_academic_term' academic_term.id %}" class="btn btn-info">
+                Edit
+            </a>
+            <a href="{% url 'main:management:delete_academic_term' academic_term.id %}" class="btn btn-danger">
+                Delete
+            </a>
+        </th>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

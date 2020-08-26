@@ -1,0 +1,27 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+        <h2 class="text-light bg-dark">Edit Grade Level: {{ object.grade_level_name }}</h2>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        <hr>
+        <form method="post"> {% csrf_token %}
+            {% for field in form %}
+            {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            <div class="form-group">
+                <label for="{{ field.html_name }}">{{ field.label }}:</label><br>
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="{% url 'main:management:delete_grade_level' object.id %}" class="btn btn-danger">Delete</a>
+        </form>
+{% endblock %}

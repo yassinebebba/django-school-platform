@@ -1,0 +1,103 @@
+{% extends "management/base_panel.html" %}
+
+{% block extra_css %}
+<!-- MDB FILES -->
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+{% endblock %}
+{% block panel_content %}
+<h2>View database</h2>
+<hr>
+<div class="treeview-animated w-20 border mx-4 my-4">
+    <h6 class="pt-3 pl-3"><i class="fas fa-database"></i> Database</h6>
+    <hr>
+    <ul class="treeview-animated-list mb-3">
+        <li class="treeview-animated-items">
+            <a class="closed">
+                <i class="fas fa-angle-right"></i>
+                <span><i class="fas fa-users ic-w mr-1"></i>Users</span>
+            </a>
+            <ul class="nested">
+                <li>
+                    <a href="{% url 'main:management:view_teachers' %}">
+                        <div class="treeview-animated-element">
+                            <i class="far fa-address-book ic-w mr-1"></i>Teachers
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'main:management:view_students' %}">
+                        <div class="treeview-animated-element">
+                            <i class="far fa-address-book ic-w mr-1"></i>Students
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview-animated-items">
+            <a class="closed">
+                <i class="fas fa-angle-right"></i>
+                <span><i class="fas fa-book"></i> Education Environment</span>
+            </a>
+            <ul class="nested">
+                <li>
+                    <a href="{% url 'main:management:view_courses' %}">
+                        <div class="treeview-animated-element">
+                            <i class="fas fa-table"></i> Courses
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'main:management:view_grade_levels' %}">
+                        <div class="treeview-animated-element">
+                            <i class="fas fa-table"></i> Grade Levels
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'main:management:view_grade_classes' %}">
+                        <div class="treeview-animated-element">
+                            <i class="fas fa-table"></i> Grade Classes
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'main:management:view_academic_terms' %}">
+                        <div class="treeview-animated-element">
+                            <i class="fas fa-table"></i> Academic Terms
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- MDB FILES -->
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+<script>
+    // Treeview Initialization
+$(document).ready(function() {
+  $('.treeview-animated').mdbTreeview();
+});
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+<h2>Course: {{ course_name }}</h2>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+<hr>
+{% for result in course_results %}
+<div class="card mb-2" style="width: 40rem;">
+    <div class="card-body">
+        <h4 class="card-title">{{ result.exam.exam_name }}: Grade ({% if result.grade_result %}
+                                                                    {{ result.grade_result }}
+                                                                        {% else %}
+                                                                    --{% endif %}/{{ result.exam.full_mark }})</h4>
+        <h5 class="card-subtitle mb-2 text-muted">{{ result.exam.exam_type }}</h5>
+        <h5 class="card-subtitle mb-2 text-muted">Feedback:</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ result.feedback }}</h6>
+        <p class="card-text">Creation date: {{ result.exam.exam_creation_date|date:"d, M, Y (H:m)" }}</p>
+        <p class="card-text">Deadline: {{ result.exam.exam_deadline|date:"d, M, Y (H:m)" }}</p>
+    </div>
+</div>
+<hr>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+        <h2>Mark Students: Student count ({{ exam.examgrade_set.count }})</h2>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        <hr>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Identifier</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Assessment name</th>
+                <th scope="col">Grade</th>
+                <th scope="col">Mark</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in exam.examgrade_set.all %}
+
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <th>
+                    <a href="{% url 'main:teachers:mark' object.id student.id %}">
+                        {{ student.student.account.identifier }}
+                    </a>
+                </th>
+                <th>{{ student.student.account.first_name }}</th>
+                <th>{{ student.student.account.last_name }}</th>
+                <th>{{ student.exam.exam_name }}</th>
+                <th>{{ student.grade_result }}/{{ student.exam.full_mark }}</th>
+                <th>
+                    <a href="{% url 'main:teachers:mark' object.id student.id %}" class="btn btn-success">Mark</a>
+                </th>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

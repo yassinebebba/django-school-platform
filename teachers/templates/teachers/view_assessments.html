@@ -1,0 +1,28 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+<h2>Assessments for: {{ user.identifier }}</h2>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+<hr>
+{% for assessment in assessments %}
+<div class="card mb-2" style="width: 40rem;">
+    <div class="card-body">
+        <h4 class="card-title">{{ assessment.exam_name }}</h4>
+        <h5 class="card-subtitle mb-2 text-muted">{{ assessment.exam_type }}</h5>
+        <h5 class="card-subtitle mb-2 text-muted">Description:</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ assessment.description }}</h6>
+        <p class="card-text">Creation date: {{ assessment.exam_creation_date|date:"d, M, Y (H:m)" }}</p>
+        <p class="card-text">Deadline: {{ assessment.exam_deadline|date:"d, M, Y (H:m)" }}</p>
+        <a href="{% url 'main:teachers:mark_students' assessment.id %}" class="btn btn-success">Mark</a>
+        <a href="{% url 'main:teachers:edit_assessment' assessment.id %}" class="btn btn-info">Edit</a>
+        <a href="{% url 'main:teachers:delete_assessment' assessment.id %}" class="btn btn-danger">Delete</a>
+    </div>
+</div>
+<hr>
+{% endfor %}
+{% endblock %}
