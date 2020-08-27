@@ -72,13 +72,16 @@ and a bunch more cool stuff...
 ## Teacher Panel
 
 In the teacher panel you can create, update, remove and delete assessments.
-When you create an assessment a signal will be made to all students in that class and
+When you create an assessment a signal will be sent to all students in that class and
 create instances with that exam in the ExamGrade table that also provide 2 other fields for
 the grade and feedback of the teacher. The teacher will get a link for his/her assessment
 in the view assessment page, in the detail view of the interested assessment the teacher
 get table with all students that were assigned the interested assessment, ready to be marked
-and given feedback. 
+and given feedback, it also could be updated (marked) again should any mistake occur. 
 
+## Student Panel
+
+In the student panel, students can view their assessments outcome and feedback from the teacher
 
 
     
