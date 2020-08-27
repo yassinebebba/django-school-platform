@@ -38,6 +38,35 @@ and a bunch more cool stuff...
             > manage.py makemigrations
             > manage.py migrate
 
+* Create a superuser:
+
+        > manage.py createsuperuser
+        
+        # All of these fields are required
+        # ['identifier', 'email', 'first_name', 'last_name', 'gender']
+        # Admin idenfifier start at this tag (admin10000000) 'admin' + 8 digits
+        # it is advisable that you use that identifier for the first admin
+        # alternatively you can change that behaviour in the custom user model in the managemnt app
+        
+* In the same terminal type > manage.py runserver (You shouldn't encounter any problems)
+* Login to your admin account and start experimenting with it
+    * The admin panel is customised, so you get all CRUD functionalities:
+        * Students
+        * Teachers
+        * Courses
+        * and more...
+> Note: students ID and teachers ID starts at 20000000 and prof10000000 respectively.
+> All identifiers are unique and auto increment when creating a new user.
+
+> Note: When creating an account there will be no option for setting the 
+> interested account password, it is all done through the reset password link
+> so make sure you supply an active email address. A random password will be set adn the user
+> should reset their password.
+> Alternately, if you are in a development environment you can use the terminal use the django shell,
+> get the interested account instance and then user instance.set_password('Your password here')
+
+    
+        
  
             
         
