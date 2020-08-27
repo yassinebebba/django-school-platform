@@ -30,7 +30,7 @@ and a bunch more cool stuff...
                 # Comment all paths
             ]
 
-* Open CMD, type cd to the folder where manage.py is located
+* Open CMD and cd to the folder where manage.py is located
 * Use these commands:
 
             > manage.py makemigrations managment
