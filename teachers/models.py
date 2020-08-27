@@ -23,7 +23,7 @@ class Exam(models.Model):
     exam_creation_date = models.DateTimeField(default=timezone.now)  # auto
     exam_deadline = models.DateTimeField()  # manual
     multiplier = models.FloatField(max_length=3)  # manual
-    full_mark = models.IntegerField(default=20)  # manual
+    full_mark = models.IntegerField(default=100)  # manual
     modified = models.DateTimeField(auto_now=True)  # auto
 
     def __str__(self):

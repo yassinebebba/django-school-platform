@@ -65,6 +65,22 @@ and a bunch more cool stuff...
 > Alternately, if you are in a development environment you can use the terminal use the django shell,
 > get the interested account instance and then user instance.set_password('Your password here')
 
+> Note: set your email host, port, address and password in settings.py and make sure you enable 
+> access to your email, because the email provider won't trust the connection that was made from django.
+> The configuration are for Gmail 
+
+## Teacher Panel
+
+In the teacher panel you can create, update, remove and delete assessments.
+When you create an assessment a signal will be made to all students in that class and
+create instances with that exam in the ExamGrade table that also provide 2 other fields for
+the grade and feedback of the teacher. The teacher will get a link for his/her assessment
+in the view assessment page, in the detail view of the interested assessment the teacher
+get table with all students that were assigned the interested assessment, ready to be marked
+and given feedback. 
+
+
+
     
         
  
