@@ -81,7 +81,7 @@ and given feedback, it also could be updated (marked) again should any mistake o
 
 ## Student Panel
 
-In the student panel, students can view their assessments outcome and feedback from the teacher
+In the student panel, students can view their assessments outcome and feedback from the teacher.
 
 
     
