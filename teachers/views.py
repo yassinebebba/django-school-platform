@@ -49,13 +49,6 @@ def update_profile_view(request):
 @permission_required('management.is_teacher', raise_exception=Http404)
 @login_required(login_url='main:login')
 def change_password_view(request):
-    """
-    PLEASE NOTE: THE CHANGE ADMIN PASSWORD VIEW WORKS FOR NOW,
-    BUT I HAVE NO IDEA IF THE SOLUTION IS IDEAL OR NOT
-    PLEASE CHECK IT.
-    give this to Rainer to check if it works for single object or not,
-    without using user_passes_test
-    """
     if request.method == 'POST':
         form = ChangePasswordForm(request.POST)
         if form.is_valid():

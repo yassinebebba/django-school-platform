@@ -28,10 +28,10 @@ class ViewCourses(PermissionRequiredMixin, ListView):
     template_name = 'students/view_courses.html'
     model = Account
     context_object_name = 'courses'
-    def get_queryset(self):
-        #return self.request.user.student.grade_class.course.all()
-        return Account.objects.get(pk=self.request.user.id).student.grade_class.course.all()
 
+    def get_queryset(self):
+        # return self.request.user.student.grade_class.course.all()
+        return Account.objects.get(pk=self.request.user.id).student.grade_class.course.all()
 
 
 @permission_required('management.is_student', raise_exception=Http404)
@@ -40,7 +40,7 @@ def view_course_result(request, course_name):
     try:
         request.user.student.grade_class.course.get(course_name=course_name)
     except ObjectDoesNotExist:
-       raise Http404
+        raise Http404
     course_results = request.user.student.examgrade_set.filter(exam_course=course_name,
                                                                exam__exam_creation_date__lte=timezone.now()
                                                                ).order_by('-exam__exam_creation_date')
@@ -55,6 +55,7 @@ def view_course_result(request, course_name):
 @login_required(login_url='main:login')
 def profile_view(request):
     return render(request, 'students/profile.html')
+
 
 @permission_required('management.is_student', raise_exception=Http404)
 @login_required(login_url='main:login')
@@ -76,16 +77,10 @@ def update_profile_view(request):
     }
     return render(request, 'students/update_profile.html', context=context)
 
+
 @permission_required('management.is_student', raise_exception=Http404)
 @login_required(login_url='main:login')
 def change_password_view(request):
-    """
-    PLEASE NOTE: THE CHANGE ADMIN PASSWORD VIEW WORKS FOR NOW,
-    BUT I HAVE NO IDEA IF THE SOLUTION IS IDEAL OR NOT
-    PLEASE CHECK IT.
-    give this to Rainer to check if it works for single object or not,
-    without using user_passes_test
-    """
     if request.method == 'POST':
         form = ChangePasswordForm(request.POST)
         if form.is_valid():

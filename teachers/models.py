@@ -4,6 +4,7 @@ from management.models import (
 )
 from django.utils import timezone
 
+
 class Teacher(CommonInfo, models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
     grade_class = models.ManyToManyField(GradeClass)
@@ -12,6 +13,7 @@ class Teacher(CommonInfo, models.Model):
 
     def __str__(self):
         return self.account.__str__()
+
 
 class Exam(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)  # auto

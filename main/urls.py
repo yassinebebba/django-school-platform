@@ -17,7 +17,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('account/', account_redirect, name='account_redirect'),
 
-
     # password reset
     path('password-reset/',
          PasswordResetView.as_view(template_name='main/password_reset.html',

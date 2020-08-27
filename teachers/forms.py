@@ -17,11 +17,10 @@ class TeacherInfoUpdateForm(forms.ModelForm):
 
 
 class ExamCreationForm(forms.ModelForm):
-
     teacher = forms.ChoiceField(widget=forms.HiddenInput, required=False)
     description = forms.CharField(label='Description',
-                      widget=forms.Textarea(attrs={'cols': '60', 'rows': '4'}),
-                      required=False)
+                                  widget=forms.Textarea(attrs={'cols': '60', 'rows': '4'}),
+                                  required=False)
 
     exam_creation_date = forms.DateTimeField(input_formats=settings.DATE_INPUT_FORMATS,
                                              widget=forms.DateTimeInput(attrs={'type': 'datetime-local', 'step': 1}),
@@ -30,8 +29,6 @@ class ExamCreationForm(forms.ModelForm):
                                         widget=forms.DateTimeInput(attrs={'type': 'datetime-local', 'step': 1}),
                                         required=True)
 
-
-    
     '''
     teacher_class_choices = {}
 
@@ -39,6 +36,7 @@ class ExamCreationForm(forms.ModelForm):
         teacher_class_choices[i.id] = i.grade_class_name
     TEACHER_CLASS_CHOICES = ((k, v) for k, v in zip(teacher_class_choices.keys(), teacher_class_choices.values()))
     grade_class = forms.ChoiceField(choices=TEACHER_CLASS_CHOICES)'''
+
     class Meta:
         model = Exam
         fields = (
