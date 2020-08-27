@@ -22,6 +22,23 @@ and a bunch more cool stuff...
             # ...
         ]
 
+* Comment all code in (views, url, admin, models, signals, forms) in all apps except for:
+    * Don't comment main/urls.py
+    * In management/urls.py comment all paths inside the urlpatterns list but don't comment the list
+    
+            urlpatterns = [
+                # Comment all paths
+            ]
+
+* Open CMD, type cd to the folder where manage.py is located
+* Use these commands:
+
+            > manage.py makemigrations managment
+            > manage.py migrate management
+            > manage.py makemigrations
+            > manage.py migrate
+
+ 
             
         
         
