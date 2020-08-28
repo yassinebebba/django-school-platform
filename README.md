@@ -44,6 +44,7 @@ and a bunch more cool stuff...
         
         # All of these fields are required
         # ['identifier', 'email', 'first_name', 'last_name', 'gender']
+        # Gender has two choices (Male and Female).
         # Admin idenfifier start at this tag (admin10000000) 'admin' + 8 digits
         # it is advisable that you use that identifier for the first admin
         # alternatively you can change that behaviour in the custom user model in the managemnt app
