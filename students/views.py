@@ -98,9 +98,6 @@ def change_password_view(request):
     else:
         form = ChangePasswordForm()
     return render(request, 'students/change_password.html', context={'form': form})
-<<<<<<< HEAD
-=======
-
 
 
 class AnalysisView(PermissionRequiredMixin, ListView):
@@ -109,8 +106,9 @@ class AnalysisView(PermissionRequiredMixin, ListView):
     template_name = 'students/analysis.html'
     model = Account
     context_object_name = 'courses'
+
     def get_queryset(self):
-        #return self.request.user.student.grade_class.course.all()
+        # return self.request.user.student.grade_class.course.all()
         return Account.objects.get(pk=self.request.user.id).student.grade_class.course.all()
 
 
@@ -120,7 +118,7 @@ def course_analysis_view(request, course_name):
     try:
         request.user.student.grade_class.course.get(course_name=course_name)
     except ObjectDoesNotExist:
-       raise Http404
+        raise Http404
     course_results = request.user.student.examgrade_set.filter(exam_course=course_name,
                                                                exam__exam_creation_date__lte=timezone.now()
                                                                ).order_by('-exam__exam_creation_date')
@@ -129,4 +127,3 @@ def course_analysis_view(request, course_name):
         'course_results': course_results
     }
     return render(request, 'students/course_analysis.html', context=context)
->>>>>>> mdb
