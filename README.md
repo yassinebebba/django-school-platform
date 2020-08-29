@@ -84,6 +84,8 @@ and given feedback, it also could be updated (marked) again should any mistake o
 
 In the student panel, students can view their assessments outcome and feedback from the teacher.
 
+Students can also view their progress and grades for every course using charts in the 'Analysis' page.
+
 
     
         
