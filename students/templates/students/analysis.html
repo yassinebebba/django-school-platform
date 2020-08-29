@@ -1,0 +1,40 @@
+{% extends "management/base_panel.html" %}
+
+
+{% block panel_content %}
+<h2>Courses</h2>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+<hr>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Course name</th>
+        <th scope="col">View</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for course in courses %}
+
+    <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <th>
+            <a href="{% url 'main:students:view_course_result' course.course_name %}">
+                {{ course.course_name }}
+            </a>
+        </th>
+        <th>
+            <a href="{% url 'main:students:course_analysis' course.course_name %}" class="btn btn-primary">
+                Analise
+            </a>
+        </th>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock panel_content %}
+

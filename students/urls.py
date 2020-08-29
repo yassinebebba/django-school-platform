@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     student_home_view, profile_view, change_password_view, update_profile_view,
-    ViewCourses, view_course_result
+    ViewCourses, view_course_result, AnalysisView, course_analysis_view
 )
 
 app_name = 'students'
@@ -17,4 +17,9 @@ urlpatterns = [
     # courses
     path('view-courses/', ViewCourses.as_view(), name='view_courses'),
     path('view-courses/view-course-result/<str:course_name>/', view_course_result, name='view_course_result'),
+
+    # analytics
+    path('analysis/', AnalysisView.as_view(), name='analysis'),
+    path('analysis/course-analysis/<str:course_name>/', course_analysis_view, name='course_analysis'),
+
 ]
