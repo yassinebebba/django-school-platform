@@ -29,7 +29,7 @@ class ExamGrade(models.Model):
     modified = models.DateTimeField(auto_now=True)  # auto
 
     def __str__(self):
-        return self.student.__str__()
+        return self.exam.exam_name
 
 
 '''

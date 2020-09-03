@@ -126,7 +126,7 @@ def course_analysis_view(request, course_name):
        raise Http404
     course_results = request.user.student.examgrade_set.filter(exam_course=course_name,
                                                                exam__exam_creation_date__lte=timezone.now()
-                                                               ).order_by('-exam__exam_creation_date')
+                                                               ).order_by('exam__exam_creation_date')
     context = {
         'course_name': course_name,
         'course_results': course_results
