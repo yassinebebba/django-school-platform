@@ -43,7 +43,7 @@ var ctxL = document.getElementById("lineChart").getContext('2d');
 var myLineChart = new Chart(ctxL, {
 type: 'line',
 data: {
-labels: ["Controle n1", "Controle n2", "Controle n3", "Syntese n1"],
+labels: [{% for exam in course_results %} '{{ exam }}', {% endfor %}],
 datasets: [{
 label: "{{ course_name }}",
 data: [{% for result in course_results %} {{ result.grade_result }}, {% endfor %}],
