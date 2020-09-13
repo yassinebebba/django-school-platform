@@ -14,6 +14,7 @@ from .forms import StudentInfoUpdateForm, StudentAccountUpdateForm
 from management.forms import ChangePasswordForm
 from django.utils import timezone
 from students.models import Student, ExamGrade
+from django.db.models import Avg
 
 
 @permission_required('management.is_student', raise_exception=Http404)
@@ -28,10 +29,10 @@ class ViewCourses(PermissionRequiredMixin, ListView):
     template_name = 'students/view_courses.html'
     model = Account
     context_object_name = 'courses'
-    def get_queryset(self):
-        #return self.request.user.student.grade_class.course.all()
-        return Account.objects.get(pk=self.request.user.id).student.grade_class.course.all()
 
+    def get_queryset(self):
+        # return self.request.user.student.grade_class.course.all()
+        return Account.objects.get(pk=self.request.user.id).student.grade_class.course.all()
 
 
 @permission_required('management.is_student', raise_exception=Http404)
@@ -40,7 +41,7 @@ def view_course_result(request, course_name):
     try:
         request.user.student.grade_class.course.get(course_name=course_name)
     except ObjectDoesNotExist:
-       raise Http404
+        raise Http404
     course_results = request.user.student.examgrade_set.filter(exam_course=course_name,
                                                                exam__exam_creation_date__lte=timezone.now()
                                                                ).order_by('-exam__exam_creation_date')
@@ -55,6 +56,7 @@ def view_course_result(request, course_name):
 @login_required(login_url='main:login')
 def profile_view(request):
     return render(request, 'students/profile.html')
+
 
 @permission_required('management.is_student', raise_exception=Http404)
 @login_required(login_url='main:login')
@@ -75,6 +77,7 @@ def update_profile_view(request):
         'info_form': info_form,
     }
     return render(request, 'students/update_profile.html', context=context)
+
 
 @permission_required('management.is_student', raise_exception=Http404)
 @login_required(login_url='main:login')
@@ -105,15 +108,15 @@ def change_password_view(request):
     return render(request, 'students/change_password.html', context={'form': form})
 
 
-
 class AnalysisView(PermissionRequiredMixin, ListView):
     permission_required = 'management.is_student'
     login_url = Http404
     template_name = 'students/analysis.html'
     model = Account
     context_object_name = 'courses'
+
     def get_queryset(self):
-        #return self.request.user.student.grade_class.course.all()
+        # return self.request.user.student.grade_class.course.all()
         return Account.objects.get(pk=self.request.user.id).student.grade_class.course.all()
 
 
@@ -123,7 +126,7 @@ def course_analysis_view(request, course_name):
     try:
         request.user.student.grade_class.course.get(course_name=course_name)
     except ObjectDoesNotExist:
-       raise Http404
+        raise Http404
     course_results = request.user.student.examgrade_set.filter(exam_course=course_name,
                                                                exam__exam_creation_date__lte=timezone.now()
                                                                ).order_by('exam__exam_creation_date')
@@ -132,3 +135,32 @@ def course_analysis_view(request, course_name):
         'course_results': course_results
     }
     return render(request, 'students/course_analysis.html', context=context)
+
+
+class PerformanceView(PermissionRequiredMixin, ListView):
+    permission_required = 'management.is_student'
+    login_url = Http404
+    template_name = 'students/performance.html'
+    model = Account
+    context_object_name = 'courses'
+
+    def get_queryset(self):
+        # return self.request.user.student.grade_class.course.all()
+        return Account.objects.get(pk=self.request.user.id).student.grade_class.course.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_student = Student.objects.get(account=self.request.user)
+        student_courses = current_student.grade_class.course.all()
+        courses_list = [course for course in student_courses]
+
+        grades_list = []
+
+        for course in courses_list:
+            current_course_avg = current_student.examgrade_set.filter(exam_course=course).aggregate(Avg('grade_result'))
+            grades_list.append(current_course_avg.get('grade_result__avg'))
+
+        context['courses_list'] = courses_list
+        context['grades_list'] = grades_list
+
+        return context
