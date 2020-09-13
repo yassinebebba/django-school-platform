@@ -86,7 +86,9 @@ In the student panel, students can view their assessments outcome and feedback f
 
 Students can also view their progress and grades for every course using charts in the 'Analysis' page.
 
-
+>In Performance the student can see what course the student has performed best.
+>From that Pie Chart we can conclude what predilection the student has 
+>whether it be Science, Engendering or Literature, etc.
     
         
  
