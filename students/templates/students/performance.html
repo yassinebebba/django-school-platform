@@ -19,11 +19,11 @@ var myPieChart = new Chart(ctxP, {
   plugins: [ChartDataLabels],
   type: 'pie',
   data: {
-    labels: ["q","r","w","a","d","asd",{% for course in courses_list %} "{{ course }}", {% endfor %}],
+    labels: [{% for course in courses_list %} "{{ course }}", {% endfor %}],
     datasets: [{
-      data: [1, 2, 3, 4, 5, 6,{% for grade in grades_list %} {{ grade }}, {% endfor %}],
-      backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
-      hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+      data: [{% for grade in grades_list %} {{ grade }}, {% endfor %}],
+      backgroundColor: [{% for colour in hex_colours %} "{{ colour }}", {% endfor %}],
+      hoverBackgroundColor: [{% for colour in hex_colours %} "{{ colour }}", {% endfor %}]
     }]
   },
   options: {
