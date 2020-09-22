@@ -160,7 +160,13 @@ class PerformanceView(PermissionRequiredMixin, ListView):
             current_course_avg = current_student.examgrade_set.filter(exam_course=course).aggregate(Avg('grade_result'))
             grades_list.append(current_course_avg.get('grade_result__avg'))
 
+        hex_colours = [
+            "#1E90FF", "#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#008B8B",
+            "#4B0082", "#FF1493", "#F4A460", "#000080", "#FF6347"
+        ]
+
         context['courses_list'] = courses_list
         context['grades_list'] = grades_list
+        context['hex_colours'] = hex_colours[:len(grades_list)]
 
         return context
