@@ -1,4 +1,4 @@
-# django-school-platform
+# Django School Platform
 
 ## Description
 
